@@ -1,26 +1,19 @@
 package main
 
 import (
+	"movies/handlers"
+
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	//instancia de routas do Gin
 	r := gin.Default()
 
-	//rota para o endpoint /ping
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"Message": "pong",
-		})
-	})
+	r.POST("/movie", handlers.CreateMovie)
+	r.GET("/movies", handlers.GetMovies)
+	r.GET("/movie/:id", handlers.GetMoviesByID)
+	r.PUT("/movie/:id", handlers.UpdateMovie)
+	r.DELETE("/movie/:id", handlers.DeleteMovie)
 
-	r.GET("/health", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"Message": "aplication is running",
-		})
-		//porta que o servidor irá escutar
-
-	})
 	r.Run(":8080")
 }

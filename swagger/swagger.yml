@@ -1,0 +1,60 @@
+openapi: 3.0.3
+info:
+  title: Movie API
+  description: API for managing movies.
+  version: 1.0.0
+paths:
+  /movie:
+    post:
+      summary: Create a new movie
+      description: Creates a new movie entry.
+      operationId: createMovie
+      requestBody:
+        description: Movie data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Movie'
+      responses:
+        '201':
+          description: Movie created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movie'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              example:
+                error: Bad request
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                error: Internal server error
+ get: # Adicionando a operação HTTP GET
+      summary: Get movie information
+      description: Retrieves movie information.
+      operationId: getMovie
+      responses:
+        '200':
+          description: Movie information retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movie'
+        '404':
+          description: Movie not found
+          content:
+            application/json:
+              example:
+                error: Movie not found
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                error: Internal server error
